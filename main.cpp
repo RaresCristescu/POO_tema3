@@ -285,10 +285,11 @@ public:
     this->v.push_back(a);
     nr++;
     }
-    void afis(){cout<<nr<<endl;
+    void afis(){cout<<"Numarul total de animale este: ";
+        cout<<nr<<endl;
     typename list<T>::iterator q;
     for(q=v.begin();q!=v.end();q++)
-       cout<<*q<<" ";
+       cout<<*q<<endl;
     }
 
 };
@@ -325,11 +326,29 @@ int main()
     cin>>a;
     a1+=a;
     cin>>a;
-    b+=a;
-    b.afis();
-//    a.afis();
-    //cout<<n;
-   // m=n;
-   // m.afis();
+    a1+=a;
+    cout<<endl;
+    a1.afis();
+    cout<<endl<<endl;
+    cin>>b;
+    b1+=b;
+    cin>>b;
+    b1+=b;
+    cout<<endl;
+    b1.afis();
+    cout<<endl<<endl;
+    cin>>c;
+    c1+=c;
+    cin>>c;
+    c1+=c;
+    cout<<endl;
+    c1.afis();
+    cout<<endl<<endl;
+    cin>>d;
+    d1+=d;
+    cin>>d;
+    d1+=d;
+    cout<<endl;
+    d1.afis();
     return 0;
 }
