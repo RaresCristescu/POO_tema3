@@ -190,14 +190,37 @@ pesti &pesti::operator=(const pesti&n)
 }
 istream &operator >>(istream&in,pesti&n)
 {
+    int cnt=0,ver=0;
+    float vi=1.00;
     in>>((vertebrate&)n);
-    char v[100];
+    char v[100],c[20];
     cout<<"Numele speciei: ";
     in>>v;
     n.nume_specie=new char[strlen(v)];
     strcpy(n.nume_specie,v);
+    n.lungime=0;
     cout<<"Lungimea pestelui: ";
-    in>>n.lungime;
+    while(cnt==0){
+    in>>c;
+    cnt=1;
+    for(int i=0;i<strlen(c);i++)
+        {
+            if(c[i]=='.'){ver=1;i++;}
+            if(c[i]>'9'||c[i]<'0')cnt=0;
+            if(ver!=1){
+            n.lungime=n.lungime*10;
+            n.lungime=n.lungime+c[i]-'0';
+            }
+            else {vi=vi/10;
+            n.lungime=n.lungime+vi*(c[i]-'0');
+            }
+        }
+    if (cnt==0)
+        {
+            n.lungime=0;
+            cout<<"Introduceti o lungime valida: ";
+        }
+    }
     return in;
 }
 class mamifere : public vertebrate
