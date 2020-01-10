@@ -1,0 +1,175 @@
+#include <iostream>
+#include<string.h>
+#include<list>
+#include<iterator>
+#include<typeindex>
+using namespace std;
+class X
+{
+    char *nume_fac;
+    int nr_if=100,nr_id=50;
+public:
+    friend istream &operator >> (istream&,X &);
+    friend ostream &operator << (ostream&,X &);
+};
+istream &operator >> (istream&in,X &ob)
+{
+    char v[100];
+    in>>v;
+    ob.nume_fac=new char[strlen(v)];
+    strcpy(ob.nume_fac,v);
+    return in;
+}
+ostream &operator<<(ostream &out,X &ob)
+{
+    out<<ob.nume_fac<<" ";
+    return out;
+}
+class IF:public X
+{
+    char cod=' ';
+    float nota_scris;
+    public:
+    friend istream &operator >> (istream&,IF &);
+    friend ostream &operator << (ostream&,IF &);
+};
+istream &operator >> (istream&in,IF &ob){
+    in>>(X&)ob;
+    in>>ob.nota_scris;
+    return in;
+}
+ostream &operator << (ostream&out,IF &ob)
+{
+    out<<(X&)ob;
+    out<<" ";
+    out<<ob.nota_scris;
+    return out;
+}
+class ID:public X
+{
+    char cod[4]="ID_";
+    float nota_oral;
+    public:
+    friend istream &operator >> (istream&,ID &);
+    friend ostream &operator << (ostream&,ID &);
+};
+istream &operator >> (istream&in,ID &ob)
+{
+    in>>(X&)ob;
+    in>>ob.nota_oral;
+    return in;
+}
+ostream &operator << (ostream&out,ID &ob)
+{
+    out<<(X&)ob<<" ";
+    out<<ob.nota_oral<<" ";
+    return out;
+}
+class ID2:public X
+{
+    char cod[5]="ID2_";
+    bool Bac_mate;
+    float Nota_p_fac;
+    float nota_oral;
+public:
+    friend istream &operator >> (istream&,ID2 &);
+    friend ostream &operator << (ostream&,ID2 &);
+
+
+};
+istream &operator >> (istream&in,ID2 &ob)
+{
+    in>>(X&)ob;
+    cout<<"S-a trecut bac-ul la mate(da/nu)";
+    char v[4];
+    cin>>v;
+    if(strcmp(v,"da"))ob.Bac_mate=1;
+    else ob.Bac_mate=0;
+    in>>ob.Nota_p_fac;
+    in>>ob.nota_oral;
+    return in;
+}
+ostream &operator <<(ostream&out,ID2 &ob)
+{
+    out<<(X&)ob<<" ";
+    out<<"nota Prima facultate: "<<ob.Nota_p_fac <<"nota oral: "<<ob.nota_oral;
+    return out;
+}
+class IF2:public X
+{
+    char cod[5]="IF2_";
+    float Nota_p_fac;
+    float nota_oral;
+public:
+    friend istream &operator >> (istream&,IF2 &);
+    friend ostream &operator << (ostream&,IF2 &);
+
+};
+istream &operator >> (istream&in ,IF2 &ob)
+{
+    in>>(X&)ob;
+    in>>ob.Nota_p_fac;
+    in>>ob.nota_oral;
+    return in;
+}
+ostream &operator << (ostream&out,IF2 &ob)
+{
+    out<<(X&)ob;
+    out<<"nota Prima facultate: "<<ob.Nota_p_fac <<"nota oral: "<<ob.nota_oral;
+    return out;
+}
+template <class T>
+class dosar
+{
+    char* nr_dosar;
+    char* nume_elev;
+    float med_bac;
+    float med_intrare;
+    T a;
+public:
+    dosar(float n=0.00){nr_dosar=n;}
+    friend istream &operator >> (istream&,dosar &);
+    friend ostream &operator
+    void citire()
+    {
+        cin>>a;
+        char v[30];
+        in>>v;
+        nume_elev=new char[strlen(v)];
+        strcpy(nume_elev,v);
+        in>>med_bac;
+    }
+    };
+/*template<class T>
+dosar &operator >> (istream&in,dosar &d)
+{
+    in>>d.a;
+    char v[30];
+    in>>v;
+    d.nume_elev=new char[strlen(v)];
+    strcpy(d.nume_elev,v);
+    in>>med_bac;
+    return in;
+}
+ostream&operator <<(ostream &out,dosar &d)
+{
+
+}*/
+template<class T>
+class Admitere{
+char *nume;
+float med;
+typename list<T> candidat;
+public:
+    friend &operator +=(T a);
+};
+
+//template<>
+//class Admitere<ID>{
+
+//};
+int main()
+{
+
+    return 0;
+}
